@@ -31,7 +31,7 @@
     {
       "name":"getPhim",
       "urls":[
-        "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?=maNhom=GP01"
+        "https://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01"
       ],
       "cacheConfig": {
         "maxSize": 5,
