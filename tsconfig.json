@@ -2,6 +2,10 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@Antd":["src/app/_core/Shared/AntDModule/Antd.module.ts"],
+      "@share/*":["src/app/_core/Shared/*"]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

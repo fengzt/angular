@@ -43,7 +43,7 @@ import { Component, OnInit } from '@angular/core';
       </h3>
       <input class="form-control mb-5" [(ngModel)]="title" />
 
-      <!-- <input class="form-control" (keyup)="changeTitle(tagInput.value)" /> -->
+      <!-- <input class="form-control" (keyup)="changeTitle(inputTitle.value)" #inputTitle /> -->
 
       <table class="table">
         <thead>
