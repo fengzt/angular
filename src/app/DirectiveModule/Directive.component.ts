@@ -67,24 +67,115 @@ import { Component, OnInit } from '@angular/core';
       <hr />
       <div>*ngFor</div>
       <div class="row">
-        <div class="col-4" *ngFor="let user of arrUser; let index = index">
-          <div class="card">
-            <img [src]="user.avatar" />
-            <div class="card-body">
-              <p>ID: {{ index + 1 }}</p>
-              <p>UserName: {{ user.userName }}</p>
-              <p>Password: {{ user.password }}</p>
-              <p>Email: {{ user.email }}</p>
+        <!-- Dùng ng-container để không bị vỡ giao diện, giống Fragment -->
+        <ng-container *ngIf="arrUser.length !== 0">
+          <div class="col-4" *ngFor="let user of arrUser; let index = index">
+            <div class="card">
+              <img [src]="user.avatar" />
+              <div class="card-body">
+                <p>ID: {{ index + 1 }}</p>
+                <p>UserName: {{ user.userName }}</p>
+                <p>Password: {{ user.password }}</p>
+                <p>Email: {{ user.email }}</p>
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
       </div>
+      <hr />
+      <h3>ng-content</h3>
+      <app-demo-ngContent>
+        <!-- ng-content dùng giữa thẻ đóng - mở của component -->
+        <!-- Thường dùng để truyền component đi, thay cho truyền props bên react -->
+        <img class="logo" src="https://picsum.photos/50/50" alt="..." />
+
+        <h3 class="title">Cybersoft</h3>
+      </app-demo-ngContent>
+      <hr />
+
+      <h3>[ngClass]</h3>
+      <p [ngClass]="{ 'mau-chu': mauChu, 'font-chu': fontChu }">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
+        voluptatem corrupti optio repellendus expedita obcaecati dignissimos rem
+        nostrum doloremque vitae?
+      </p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>userName</th>
+            <th>password</th>
+            <th>email</th>
+            <th>avatar</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- class được add vào nếu biểu thức sau : là True -->
+          <tr
+            [ngClass]="{ 'bg-dark text-white': index % 2 == 0 }"
+            *ngFor="let user of arrUser; let index = index"
+          >
+            <th>{{ user.userName }}</th>
+            <th>{{ user.password }}</th>
+            <th>{{ user.email }}</th>
+            <th>{{ user.avatar }}</th>
+            <th></th>
+          </tr>
+        </tbody>
+      </table>
+      <hr />
+      <h3>[ngStyle]</h3>
+      <div
+        [ngStyle]="{ 'background-image': backgroundImg }"
+        style="height:50px"
+      ></div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis impedit
+        velit exercitationem error cupiditate porro neque corrupti nemo labore
+        sapiente.
+      </p>
+      <hr />
+      <h3>Bài tập 3</h3>
+      <p [ngStyle]="{ 'font-size': fontSize + 'px' }">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis impedit
+        velit exercitationem error cupiditate porro neque corrupti nemo labore
+        sapiente.
+      </p>
+      <button class="m-2 btn btn-outline-success" (click)="tangGiamFont(true)">
+        +
+      </button>
+      <button class="m-2 btn btn-outline-success" (click)="tangGiamFont(false)">
+        -
+      </button>
+
+      <hr />
+      <h3>Bài tập login</h3>
+      <app-bt-directive></app-bt-directive>
+      <hr />
+      <h3>Bài tập Quản lý Sản phẩm</h3>
+      <app-bt-qlsp></app-bt-qlsp>
     </div>
   `,
+  styles: [
+    `
+      .mau-chu {
+        color: red;
+      }
+      .font-chu {
+        font-size: 25px;
+      }
+    `,
+  ],
 })
 
 // Module Part
 export class DirectiveComponent implements OnInit {
+  fontSize: number = 17;
+  backgroundImg: string = "url('https://picsum.photos/200/200')";
+
+  mauChu: boolean = true;
+  fontChu: boolean = false;
+
   userName: string = 'FengABC';
   isLogin: boolean = false;
   numb: number = 5;
@@ -117,14 +208,22 @@ export class DirectiveComponent implements OnInit {
   logout() {
     this.isLogin = false;
   }
+
+  tangGiamFont(tangGiam: boolean) {
+    if (tangGiam) {
+      this.fontSize += 2;
+    } else {
+      this.fontSize -= 2;
+    }
+  }
   constructor() {}
 
   ngOnInit() {}
 }
 
-interface User{
-    userName: string;
-    password: string;
-    email: string;
-    avatar: string;
+interface User {
+  userName: string;
+  password: string;
+  email: string;
+  avatar: string;
 }
