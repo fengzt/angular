@@ -98,7 +98,7 @@ registerLocaleData(en);
       registrationStrategy: 'registerWhenStable:30000',
     }), // Module giúp gọi API
   ],
-  // ----------
+  // ------------
   // Nơi khai báo các serve
   providers: [
     // Set up đa ngôn ngữ "I18N Angular"
